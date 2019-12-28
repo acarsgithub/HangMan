@@ -22,7 +22,7 @@ for i in range(4):
     boxTurtle.right(90)
 
 boxTurtle.penup()
-boxTurtle.color("gold")
+boxTurtle.color("white")
 boxTurtle.goto(-130, 200)
 boxTurtle.write("STICKMAN", font=("Arial", 40, "normal"))
 print("Welcome to Stickman!")
@@ -42,7 +42,7 @@ stickmanTurtle.pensize(5)
 stickmanTurtle.ht()
 stickmanTurtle.pendown()
 
-word = "hello"
+word = "notay"
 for i in range(len(word)):
     stickmanTurtle.forward(50)
     stickmanTurtle.penup()
@@ -93,7 +93,12 @@ while True:
     userGuess = input("Guess a letter and determine stickman's fate: ")
     for i in range(len(word)):
         if(userGuess == word[i]):
-            #draw letter on blank line
+            letterTurtle = turtle.Turtle()
+            letterTurtle.penup()
+            letterTurtle.ht()
+            letterTurtle.color('blue')
+            letterTurtle.goto(-215 + (100 * i), -195)
+            letterTurtle.write(word[i].upper(), font=("Times New Roman", 40, "normal"))
             numLetters += 1
     if(numLetters == 0):
         numErrors += 1
