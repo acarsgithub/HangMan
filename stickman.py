@@ -26,8 +26,8 @@ for i in range(4):
 
 boxTurtle.penup()
 boxTurtle.color("white")
-boxTurtle.goto(-130, 200)
-boxTurtle.write("STICKMAN", font=("Arial", 40, "normal"))
+boxTurtle.goto(-150, 200)
+boxTurtle.write("STICKMAN", font=("Times New Roman", 45, "normal"))
 print("Welcome to Stickman!")
 print("Guess the word!")
 
@@ -91,7 +91,7 @@ def drawStickLegs(myTurtle, length):
     myTurtle.left(30)
 
 def drawStickArms(myTurtle, length):
-    myTurtle.backward(45)
+    myTurtle.backward(55)
     drawStickLegs(myTurtle, length)
 
 def drawStickEyes(myTurtle, x, y):
@@ -124,34 +124,55 @@ def drawStick(number, myTurtle):
         drawStickEyes(myTurtle, -8, 75)
         drawStickEyes(myTurtle, 12, 75)
 
+resultTurtle = turtle.Turtle()
+resultTurtle.ht()
+resultTurtle.penup()
+resultTurtle.goto(-87.5, 120)
+
+lettersList = []
+
 
 while True:
     userGuess = input("Guess a letter and determine stickman's fate: ")
+    guessedAlready = False
+    for letter in lettersList:
+        if(letter == userGuess):
+            guessedAlready = True
 
-    # algorithm to determine if the user guess is correct
-    for i in range(len(word)):
-        if(userGuess == word[i]):
-            letterTurtle = turtle.Turtle()
-            letterTurtle.penup()
-            letterTurtle.ht()
-            letterTurtle.color('blue')
-            letterTurtle.goto(-215 + (100 * i), -195)
-            letterTurtle.write(word[i].upper(), font=("Times New Roman", 40, "normal"))
-            numLetters += 1
-            numCorrect += 1
-        
-    # the user guessed the wrong letter
-    if(numLetters == 0):
-        numErrors += 1
-        drawStick(numErrors, myTurtle)
-    numLetters = 0
+    if(guessedAlready == False):
+        # algorithm to determine if the user guess is correct
+        for i in range(len(word)):
+            if(userGuess == word[i]):
+                letterTurtle = turtle.Turtle()
+                letterTurtle.penup()
+                letterTurtle.ht()
+                letterTurtle.color('blue')
+                letterTurtle.goto(-215 + (100 * i), -195)
+                letterTurtle.write(word[i].upper(), font=("Times New Roman", 40, "normal"))
+                numLetters += 1
+                numCorrect += 1
 
-    # determinig if the user won the game
-    if(numCorrect == wordLength):
-        input("Great job! You won the game. Press enter to quit: ")
-        break
+        lettersList.append(userGuess)
 
-    # determining if the stickman died
-    if numErrors >= 5:
-        input("Game over. Stickman died. Try again next time! Press enter to quit: ")
-        break
+        # the user guessed the wrong letter
+        if(numLetters == 0):
+            numErrors += 1
+            drawStick(numErrors, myTurtle)
+        numLetters = 0
+
+        # determinig if the user won the game
+        if(numCorrect == wordLength):
+            resultTurtle.forward(25)
+            resultTurtle.color('green')
+            resultTurtle.write("NICE", font=("Times New Roman", 50, "normal"))
+            input("Great job! You won the game. Press enter to quit: ")
+            break
+
+        # determining if the stickman died
+        if numErrors >= 5:
+            resultTurtle.color('red')
+            resultTurtle.write("DEAD", font=("Times New Roman", 50, "normal"))
+            input("Game over. Stickman died. Try again next time! Press enter to quit: ")
+            break
+    else:
+        print("You have already guessed this letter. Guess voided!")
