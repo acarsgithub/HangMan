@@ -149,6 +149,7 @@ while True:
         for i in range(len(word)):
             if(userGuess == word[i]):
                 letterTurtle = turtle.Turtle()
+                letterTurtle.speed(0)
                 letterTurtle.penup()
                 letterTurtle.ht()
                 letterTurtle.color('blue')
@@ -182,6 +183,7 @@ while True:
             # show the user what the correct word was
             for i in range(len(word)):
                 letterTurtle = turtle.Turtle()
+                letterTurtle.speed(0)
                 letterTurtle.penup()
                 letterTurtle.ht()
                 letterTurtle.color('blue')
