@@ -110,7 +110,8 @@ def drawStickEyes(myTurtle, x, y):
     myTurtle.forward(7)
     myTurtle.right(45)
     myTurtle.pensize(5)
-    
+
+# function that determines which part of stickman's body it should draw
 def drawStick(number, myTurtle):
     if(number == 1):
         drawStickHead(myTurtle)
@@ -124,16 +125,20 @@ def drawStick(number, myTurtle):
         drawStickEyes(myTurtle, -8, 75)
         drawStickEyes(myTurtle, 12, 75)
 
+# turtle for final result display
 resultTurtle = turtle.Turtle()
 resultTurtle.ht()
 resultTurtle.penup()
 resultTurtle.goto(-87.5, 120)
 
+# list to contain the letters already guessed
 lettersList = []
 
 
 while True:
     userGuess = input("Guess a letter and determine stickman's fate: ")
+
+    # determining if the user guess has already been made
     guessedAlready = False
     for letter in lettersList:
         if(letter == userGuess):
@@ -152,6 +157,7 @@ while True:
                 numLetters += 1
                 numCorrect += 1
 
+        # appending to user guess list
         lettersList.append(userGuess)
 
         # the user guessed the wrong letter
@@ -172,6 +178,16 @@ while True:
         if numErrors >= 5:
             resultTurtle.color('red')
             resultTurtle.write("DEAD", font=("Times New Roman", 50, "normal"))
+
+            # show the user what the correct word was
+            for i in range(len(word)):
+                letterTurtle = turtle.Turtle()
+                letterTurtle.penup()
+                letterTurtle.ht()
+                letterTurtle.color('blue')
+                letterTurtle.goto(-215 + (100 * i), -195)
+                letterTurtle.write(word[i].upper(), font=("Times New Roman", 40, "normal"))
+        
             input("Game over. Stickman died. Try again next time! Press enter to quit: ")
             break
     else:
