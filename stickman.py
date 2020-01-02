@@ -27,8 +27,8 @@ for i in range(4):
 boxTurtle.penup()
 boxTurtle.color("white")
 boxTurtle.goto(-150, 200)
-boxTurtle.write("STICKMAN", font=("Times New Roman", 45, "normal"))
-print("Welcome to Stickman!")
+boxTurtle.write("HANGMAN", font=("Times New Roman", 45, "normal"))
+print("Welcome to Hangman!")
 print("Guess the word!")
 
 myTurtle = turtle.Turtle()
