@@ -8,6 +8,7 @@ screen.bgcolor("black")
 numLetters = 0
 numErrors = 0
 numCorrect = 0
+lives = 5
 
 
 # drawing the boundary box of the game
@@ -29,7 +30,7 @@ boxTurtle.color("white")
 boxTurtle.goto(-150, 200)
 boxTurtle.write("HANGMAN", font=("Times New Roman", 45, "normal"))
 print("Welcome to Hangman!")
-print("Guess the word!")
+print("Guess the word!\n")
 
 myTurtle = turtle.Turtle()
 myTurtle.speed(0)
@@ -157,6 +158,7 @@ while True:
                 letterTurtle.write(word[i].upper(), font=("Times New Roman", 40, "normal"))
                 numLetters += 1
                 numCorrect += 1
+        
 
         # appending to user guess list
         lettersList.append(userGuess)
@@ -164,7 +166,14 @@ while True:
         # the user guessed the wrong letter
         if(numLetters == 0):
             numErrors += 1
+            lives -= 1
+            print("You missed! " + str(lives) + " lives left.\n")
             drawStick(numErrors, myTurtle)
+        elif (numCorrect == 1):
+            print("Correct! Great guess! You got 1 letter this turn.\n")
+        else:
+            print("Correct! Great guess! You got " + str(numCorrect) + " letters this turn.\n")
+
         numLetters = 0
 
         # determinig if the user won the game
